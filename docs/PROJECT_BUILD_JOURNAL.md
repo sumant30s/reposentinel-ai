@@ -68,4 +68,12 @@ python scripts/check_secrets.py
 python scripts/validate_sarif.py docs/evidence/sample.sarif
 ```
 
-Remote publication/CI outcomes are appended only after the corresponding tool returns actual evidence. No Render account, deployment hook, model API key or running local model was supplied to the build.
+## Observed remote publication and validation — 2026-11-03
+
+Created the private [sumant30s/reposentinel-ai](https://github.com/sumant30s/reposentinel-ai) repository and published 117 project files through the connected GitHub Git-data API. The implementation commit is `e7a917da2154480330afadbeb18ec944b57e8cf6`, tree `680c97ecd0f510769246b13bec3cc969c5dee141`. No executor Git credentials were embedded in files.
+
+[Actions run 41593022163](https://github.com/sumant30s/reposentinel-ai/actions/runs/41593022163) completed successfully at 06:59:13 UTC. The actual runner logs reported 72 backend tests with 90.26% statement coverage and four frontend tests. All checks passed, including locked installs, lint/format/types, frontend build, security gates with the documented dependency exceptions, real analyzer/SARIF validation, Docker build and PostgreSQL Compose smoke testing. The deployed controlled scan completed with 17 candidate findings and the services were torn down afterwards. No CI code fixes were needed for this first published run.
+
+The workflow uploaded validation evidence (artifact `13210724226`, expires 2026-11-17). `docs/evidence/github-ci.json` preserves the observed metadata and result summary. A documentation-only follow-up records these results without rerunning unchanged code.
+
+GHCR `publish` and Render `deploy` were skipped because their activation variables were unset. No Render account, deployment hook, model API key or running local model was supplied to the build. Public cloud hosting, browser visual QA, native Windows and live model inference remain unverified. The owner must review the paid Render plan and connect the account before provisioning can proceed.

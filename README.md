@@ -75,7 +75,7 @@ docker compose down
 
 `docker compose down` preserves volumes. `docker compose down -v` deletes the database and staging volume: use it only when you intentionally want to erase local scan history.
 
-Docker was not available in the implementation workspace. Consult the final verification record for whether GitHub's Docker/Compose job subsequently ran; do not interpret this configuration alone as a verified deployment.
+Docker was unavailable in the local implementation workspace. The [verified GitHub Actions run](https://github.com/sumant30s/reposentinel-ai/actions/runs/41593022163) built the image, started PostgreSQL and the application with Compose, and completed a real demo scan with 17 candidate findings. This verifies the containers on GitHub's Linux runner; cloud hosting and Windows execution remain unverified.
 
 ## Local development — Linux / WSL2
 
@@ -151,6 +151,8 @@ An intentionally disabled engine is not a runtime failure. An unknown version ra
 AI transmits only the trusted rule catalog ID/title, rule CWE/OWASP, remediation, severity and confidence. It does **not** send filenames, original source, evidence text or advisory descriptions. Consequently, its proposed changes are generic patterns rather than repository-specific diffs. Human review is mandatory; no patch or commit is automatically applied.
 
 ## Verification
+
+[GitHub Actions run 41593022163 passed](https://github.com/sumant30s/reposentinel-ai/actions/runs/41593022163) for implementation commit `e7a917da2154480330afadbeb18ec944b57e8cf6`: 72 backend tests, 90.26% CI statement coverage, four frontend tests, lint/types/build, security gates, SARIF validation, Docker build and PostgreSQL Compose scan. Local statement coverage was 90.34%. The Python dependency gate includes five disclosed, expiring exceptions; it is not a clean raw audit. GHCR publishing and Render deployment were skipped because their configuration switches were unset.
 
 ```bash
 ruff check --config backend/pyproject.toml backend scripts

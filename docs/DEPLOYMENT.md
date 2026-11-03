@@ -4,7 +4,7 @@
 
 The Docker image builds the React production bundle, installs hash-locked Python dependencies, packages the backend, runs as UID 10001 and uses tini. The supervisor applies Alembic migrations, starts one Uvicorn process and one worker, and terminates its peer when either process exits. Compose adds PostgreSQL, a health-dependent start, persistent volumes, a read-only app filesystem, writable private data/tmp, dropped capabilities, CPU/memory/process limits and a loopback host port.
 
-The implementation workspace had no Docker executable/daemon. Local Docker execution is therefore not claimed. Check `docs/TESTING.md` and the GitHub Actions run for subsequent remote evidence.
+The implementation workspace had no Docker executable/daemon. Docker was verified remotely in [Actions run 41593022163](https://github.com/sumant30s/reposentinel-ai/actions/runs/41593022163): the image built, both Compose services became healthy, and a real scan completed with 17 candidate findings using PostgreSQL. This was an ephemeral CI deployment, torn down after the check. No public cloud application or published GHCR image exists yet.
 
 ## Run Docker locally
 

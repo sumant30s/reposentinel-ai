@@ -23,10 +23,21 @@ Build session: 2026-11-02–03. Execution environment: Linux x86_64, Python 3.12
 | Synthetic labeled corpus | 10/10 positives detected; 0/10 negative snippets flagged | `evidence/benchmark.json`; small self-authored corpus only |
 | Live AI inference | Not tested: no model key or running Ollama model was supplied | Valid/invalid provider contracts and fallback/consent behavior tested with clearly mocked HTTP responses |
 | Browser visual QA / screenshot | Unverified: managed preview lacked the project's Python virtual environment | Preview attempt failed before application health |
-| Docker / PostgreSQL | Not executable locally: Docker unavailable | Compose smoke check is configured in GitHub Actions; remote result tracked separately |
-| GHCR / Render | Configured but not provisioned/published by local tests | Requires account settings, credentials, environment and hosting-cost approval |
+| Docker / PostgreSQL | Passed on GitHub's Linux runner: image built, both services healthy, controlled scan completed with 17 candidate findings | Actions run 41593022163 and `evidence/github-ci.json`; not run locally or on Windows |
+| GitHub Actions | Checks passed; 72 backend tests, 90.26% CI statement coverage and four frontend tests | [Run 41593022163](https://github.com/sumant30s/reposentinel-ai/actions/runs/41593022163) |
+| GHCR / Render | Jobs skipped; no image published and no public cloud service provisioned | Requires account settings, credentials, environment and hosting-cost approval |
 
-The final GitHub Actions publication result is appended below after it is observed. Until that entry exists, this document does not claim a successful remote workflow or cloud deployment.
+## Verified GitHub publication and CI
+
+The private repository is [sumant30s/reposentinel-ai](https://github.com/sumant30s/reposentinel-ai). Implementation commit `e7a917da2154480330afadbeb18ec944b57e8cf6` contains the 117 initial project files. [Actions run 41593022163](https://github.com/sumant30s/reposentinel-ai/actions/runs/41593022163) completed successfully on 2026-11-03 at 06:59:13 UTC. The checked-in `evidence/github-ci.json` records the observed run, job steps and results.
+
+The runner used Python 3.12.15. Its 72 backend tests passed with 90.26% statement coverage, compared with 90.34% in the final local Python 3.12.14 run. These are separate actual measurements, not interchangeable rounded claims. Frontend lint, four tests and the production build passed. Bandit, bundled Semgrep rules, the scoped dependency gate, npm audit, tracked-file secret check and SARIF validation passed. The raw Python audit still reported five known advisories covered by exact expiring exceptions.
+
+The Docker image built successfully. Compose started PostgreSQL and the application, both became healthy, `/health` returned `ok`, and the authenticated deployed smoke check reported `completed` with 17 candidate findings. Compose then removed its disposable containers and volumes. This is evidence of a successful ephemeral Docker/PostgreSQL deployment in CI, not a public website.
+
+The run uploaded `validation-evidence`, artifact ID `13210724226`, digest `sha256:7046011acb643761929774cf2c94305fadf138bcebcf448850f5b205e09ffbc8`, with expiration 2026-11-17. Download it from the run before that date for the runner-generated XML/JSON reports. GitHub's job logs corroborate the summarized results. The source repository separately retains local evidence and the remote result summary.
+
+The `publish` and `deploy` jobs were **skipped** because their activation variables were unset. No GHCR image or Render deployment is claimed. The run also emitted nonfatal upstream TestClient/Node deprecation and frontend bundle-size warnings; those are maintenance items, not test failures. Browser rendering, native Windows and live model inference remain unverified.
 
 ## What the automated tests actually cover
 
