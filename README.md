@@ -4,6 +4,8 @@
 
 A working, single-owner security review application built with **FastAPI, React, TypeScript, SQLAlchemy, SQLite/PostgreSQL and real security analyzers**. Upload an authorized source ZIP, scan an allowlisted public GitHub repository, or inspect a local directory with the CLI. Review potential findings, dependency advisories, explanations and exportable reports.
 
+**Live free demo:** [reposentinel-ai-demo.onrender.com](https://reposentinel-ai-demo.onrender.com/). The owner retrieves `RS_API_TOKEN` from the [Render service dashboard](https://dashboard.render.com/web/srv-dbkoq9m7bikc73fg65qg) → Environment and enters it on the login screen. The service sleeps when idle and its local scan history resets on restarts; download reports you want to keep. [Deployment evidence and access instructions](docs/RENDER_FREE_DEMO.md).
+
 > A clean scan is not proof of security. Results are review candidates. This is a portfolio/educational tool, not a certified medical-device security product or a public multi-tenant scanning service.
 
 ## Start here
@@ -153,7 +155,7 @@ AI transmits only the trusted rule catalog ID/title, rule CWE/OWASP, remediation
 
 ## Verification
 
-[GitHub Actions run 41593022163 passed](https://github.com/sumant30s/reposentinel-ai/actions/runs/41593022163) for implementation commit `e7a917da2154480330afadbeb18ec944b57e8cf6`: 72 backend tests, 90.26% CI statement coverage, four frontend tests, lint/types/build, security gates, SARIF validation, Docker build and PostgreSQL Compose scan. Local statement coverage was 90.34%. The Python dependency gate includes five disclosed, expiring exceptions; it is not a clean raw audit. GHCR publishing and Render deployment were skipped because their configuration switches were unset.
+[GitHub Actions run 41595665902 passed](https://github.com/sumant30s/reposentinel-ai/actions/runs/41595665902) for implementation commit `7997cd2fe677bd8e5d2eb9d49f09c626634a8ea3`: 72 backend tests, 90.27% CI statement coverage, five frontend tests, lint/types/build, security gates, SARIF validation, Docker build and PostgreSQL Compose scan. Local statement coverage was 90.34%. The Python dependency gate includes five disclosed, expiring exceptions; it is not a clean raw audit. The GitHub publish/deploy jobs remain disabled. A subsequent authorized direct Render deployment is live and passed an authenticated real scan with all four engines, OSV and all four report formats; see the deployment record.
 
 ```bash
 ruff check --config backend/pyproject.toml backend scripts
@@ -178,7 +180,9 @@ The Python coverage gate is 80% across application modules, including untested s
 
 The GitHub workflow performs tests, analysis, dependency/secret gates, SARIF validation, Docker build and PostgreSQL Compose smoke checks. GHCR publishing and Render deployment require explicit repository variables/secrets and the `production` environment. They never run for pull requests. Render deployment requests the exact verified commit and waits for its revision in `/health`.
 
-See [Deployment](docs/DEPLOYMENT.md) for exact owner steps and costs requiring approval. Browser visual QA/screenshots could not be completed in the implementation workspace because its managed preview did not contain the Python virtual environment. No fabricated product screenshot is included. The production frontend build and real HTTP static serving were tested.
+The free Render deployment is live. Browser inspection verified its actual login screen and temporary-storage notice; the authenticated API scan/report flow was checked separately over public HTTPS. Dashboard interaction in a signed-in browser and native Windows execution remain unverified. The earlier managed-preview attempt failed before this successful public login-screen verification. See [Deployment](docs/DEPLOYMENT.md) for the separate paid persistent-hosting option.
+
+![Verified live Render login screen](docs/evidence/render-login.jpg)
 
 ## Project map
 

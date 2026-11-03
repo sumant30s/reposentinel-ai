@@ -4,7 +4,7 @@
 
 The Docker image builds the React production bundle, installs hash-locked Python dependencies, packages the backend, runs as UID 10001 and uses tini. The supervisor applies Alembic migrations, starts one Uvicorn process and one worker, and terminates its peer when either process exits. Compose adds PostgreSQL, a health-dependent start, persistent volumes, a read-only app filesystem, writable private data/tmp, dropped capabilities, CPU/memory/process limits and a loopback host port.
 
-The implementation workspace had no Docker executable/daemon. Docker was verified remotely in [Actions run 41593022163](https://github.com/sumant30s/reposentinel-ai/actions/runs/41593022163): the image built, both Compose services became healthy, and a real scan completed with 17 candidate findings using PostgreSQL. This was an ephemeral CI deployment, torn down after the check. No public cloud application or published GHCR image exists yet.
+The implementation workspace had no Docker executable/daemon. Docker was verified remotely in [Actions run 41595665902](https://github.com/sumant30s/reposentinel-ai/actions/runs/41595665902): the image built, both Compose services became healthy, and a real scan completed with 17 candidate findings using PostgreSQL. The free public Render demo is now live with ephemeral SQLite; see [RENDER_FREE_DEMO.md](RENDER_FREE_DEMO.md). No GHCR image was published.
 
 ## Run Docker locally
 
@@ -30,9 +30,9 @@ Owner setup:
 
 The deployment job depends on successful checks and the production environment. A configured workflow is not evidence that it has run; record the actual Actions URL/conclusion.
 
-## Render — not provisioned automatically
+## Render — live free demo and optional paid hosting
 
-The owner subsequently authorized a **free interview demo**. Its separate profile and deployment record are described in [RENDER_FREE_DEMO.md](RENDER_FREE_DEMO.md). That profile uses ephemeral SQLite and does not apply the paid Blueprint below.
+The owner authorized and connected the **free interview demo**, now live at [reposentinel-ai-demo.onrender.com](https://reposentinel-ai-demo.onrender.com/). Its profile, login instructions and deployment evidence are in [RENDER_FREE_DEMO.md](RENDER_FREE_DEMO.md). This uses ephemeral SQLite and does not apply the paid Blueprint below. Automatic deployment is off; the initial public deployment was performed directly with the connected Render tools after successful CI, not by the optional GitHub deploy-hook job.
 
 `render.yaml` defines a Docker web service, persistent scan-staging disk and PostgreSQL database. These resources can incur charges. The account owner must approve the actual plan/costs in Render before provisioning. No credentials or paid services were invented or purchased by the build.
 

@@ -1,0 +1,87 @@
+{
+  "url": "https://reposentinel-ai-demo.onrender.com",
+  "expected_revision": "c9a6499b7112e826c512fc60d353faae7c6fdbe2",
+  "observed_at": "2026-11-03T07:30:47.993708+00:00",
+  "health": {
+    "status": "ok",
+    "version": "0.1.0",
+    "revision": "c9a6499b7112e826c512fc60d353faae7c6fdbe2",
+    "demo_mode": true
+  },
+  "index_status": 200,
+  "security_headers": {
+    "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "DENY",
+    "cache-control": "no-store"
+  },
+  "unauthenticated_status": 401,
+  "scan": {
+    "id": "4d9888e9-7a84-42f2-b6fe-ca6bc0d50d43",
+    "repository_id": "bf4282e4-5c56-42b4-a632-4f20a40c5773",
+    "name": "Demo \u00b7 intentionally vulnerable",
+    "status": "completed",
+    "created_at": "2026-11-03T07:31:11.855030",
+    "started_at": "2026-11-03T07:31:12.052459",
+    "finished_at": "2026-11-03T07:32:22.142201",
+    "summary": {
+      "total": 17,
+      "active": 17,
+      "suppressed": 0,
+      "severities": {
+        "critical": 0,
+        "high": 9,
+        "medium": 8,
+        "low": 0
+      },
+      "files_scanned": 3,
+      "lines_scanned": 28,
+      "duration_seconds": 59.682,
+      "warnings": [],
+      "engines": {
+        "bandit": {
+          "status": "completed"
+        },
+        "detect-secrets": {
+          "status": "completed"
+        },
+        "semgrep": {
+          "status": "completed"
+        },
+        "pip-audit": {
+          "status": "completed",
+          "advisory_matches": 10,
+          "detail": "Cross-check; OSV findings are normalized separately"
+        }
+      },
+      "coverage": "completed",
+      "dependency_count": 1,
+      "policy": {
+        "threshold": "high",
+        "violated": true
+      },
+      "notice": "A clean scan does not prove security. This scan has bounded language/rule coverage; manual review remains necessary."
+    },
+    "error": null
+  },
+  "reports": {
+    "json": {
+      "status": 200,
+      "bytes": 36014
+    },
+    "html": {
+      "status": 200,
+      "bytes": 5139
+    },
+    "csv": {
+      "status": 200,
+      "bytes": 2766
+    },
+    "sarif": {
+      "status": 200,
+      "bytes": 16161
+    }
+  },
+  "finding_count": 17,
+  "explanation_provider": "local-guidance"
+}

@@ -10,22 +10,73 @@
     "run_id": 41595665902,
     "url": "https://github.com/sumant30s/reposentinel-ai/actions/runs/41595665902",
     "status": "completed",
-    "conclusion": "success"
+    "conclusion": "success",
+    "backend_tests": 72,
+    "frontend_tests": 5,
+    "statement_coverage_percent": 90.27
   },
-  "deployment_status": "blocked_before_service_creation",
-  "public_url": null,
-  "service_id": null,
-  "attempt": {
-    "operation": "create_web_service",
-    "response_status": 400,
-    "error": "passed in repository URL is invalid or unfetchable: https://github.com/sumant30s/reposentinel-ai"
-  },
+  "deployment_status": "live",
+  "public_url": "https://reposentinel-ai-demo.onrender.com/",
+  "service_id": "srv-dbkoq9m7bikc73fg65qg",
   "verification": {
-    "repository_exists": true,
     "repository_private": true,
-    "repository_default_branch": "main",
-    "render_service_list_after_attempt": null,
-    "live_http_smoke": "not run; no deployment exists"
+    "deployed_revision_confirmed": true,
+    "health_status": 200,
+    "index_status": 200,
+    "unauthenticated_api_status": 401,
+    "authenticated_api_status": 200,
+    "live_scan_status": "completed",
+    "candidate_findings": 17,
+    "engines": {
+      "bandit": "completed",
+      "detect-secrets": "completed",
+      "semgrep": "completed",
+      "pip-audit": "completed"
+    },
+    "reports": {
+      "json": 200,
+      "html": 200,
+      "csv": 200,
+      "sarif": 200
+    },
+    "explanation_provider": "local-guidance",
+    "browser": "Public login screen and temporary-storage notice visually verified; authenticated dashboard interaction not performed",
+    "screenshot": "render-login.jpg",
+    "smoke_evidence": "render-smoke.json",
+    "later_recheck": {
+      "at": "2026-11-03T12:53:11.459395+00:00",
+      "health": 200,
+      "index": 200,
+      "unauthenticated_api": 401,
+      "authenticated_api": 200,
+      "retained_scans": 0,
+      "note": "Service had slept/restarted; ephemeral history loss is disclosed."
+    }
   },
-  "required_owner_action": "Connect GitHub deployment credentials in Render and grant the Render GitHub App access to sumant30s/reposentinel-ai. Then retry the already authorized free deployment."
+  "deploy_id": "dep-dbkoqae7bikc73fg67s0",
+  "deployed_commit": "c9a6499b7112e826c512fc60d353faae7c6fdbe2",
+  "live_at": "2026-11-03T07:30:28.456615Z",
+  "attempts": [
+    {
+      "operation": "create_web_service",
+      "response_status": 400,
+      "error": "passed in repository URL is invalid or unfetchable: https://github.com/sumant30s/reposentinel-ai",
+      "result": "blocked; no service created"
+    },
+    {
+      "operation": "create_web_service",
+      "result": "service created after owner connected GitHub",
+      "created_at": "2026-11-03T07:28:39.63318Z"
+    }
+  ],
+  "configuration": {
+    "runtime": "docker",
+    "plan": "free",
+    "region": "singapore",
+    "database": "ephemeral SQLite",
+    "persistent_disk": false,
+    "auto_deploy": "off",
+    "platform_health_check": "default TCP; HTTP /health independently verified",
+    "live_ai_provider": "none"
+  }
 }

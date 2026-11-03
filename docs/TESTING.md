@@ -9,7 +9,7 @@ Build session: 2026-11-02–03. Execution environment: Linux x86_64, Python 3.12
 | Backend unit/integration tests | 72 passing in the recorded run; ≥80% overall application coverage gate passed | `evidence/pytest-output.txt`, `pytest.xml`, `coverage.json` |
 | Overall statement coverage | 90.34% in the final local run; no excluded application modules | `evidence/coverage.json` |
 | Python lint/format/type checks | Passed locally after fixes | Ruff + mypy commands in README/build journal |
-| Frontend | Four Vitest tests passed; TypeScript/Vite build and ESLint passed | Actual local command runs; package-lock fixes recorded below |
+| Frontend | Five Vitest tests, TypeScript/Vite build and ESLint passed after adding the free-demo notice | [Run 41595665902](https://github.com/sumant30s/reposentinel-ai/actions/runs/41595665902); earlier four-test results are retained as historical evidence |
 | Frontend dependency audit | Zero known vulnerabilities returned after upgrading Vitest and overriding minimatch | `evidence/npm-audit.json` |
 | Python dependency audit | Five known advisories in Semgrep's pinned MCP/OpenTelemetry dependencies | `evidence/python-audit.json` |
 | Scoped dependency gate | No unreviewed blocking advisories; five exact exceptions expire 2026-12-02 | `evidence/dependency-gate.json`, `../security/advisory-exceptions.json` |
@@ -22,10 +22,11 @@ Build session: 2026-11-02–03. Execution environment: Linux x86_64, Python 3.12
 | Synthetic performance | 100,000 lines / 200 generated inputs, 1.1476 seconds for AST + secret patterns in the measured run | `evidence/benchmark.json` |
 | Synthetic labeled corpus | 10/10 positives detected; 0/10 negative snippets flagged | `evidence/benchmark.json`; small self-authored corpus only |
 | Live AI inference | Not tested: no model key or running Ollama model was supplied | Valid/invalid provider contracts and fallback/consent behavior tested with clearly mocked HTTP responses |
-| Browser visual QA / screenshot | Unverified: managed preview lacked the project's Python virtual environment | Preview attempt failed before application health |
+| Browser visual QA / screenshot | Public Render login page and free-demo notice visually verified; signed-in dashboard interaction remains unverified | `evidence/render-login.jpg`; replaces the earlier blocked managed-preview attempt for login-screen verification only |
 | Docker / PostgreSQL | Passed on GitHub's Linux runner: image built, both services healthy, controlled scan completed with 17 candidate findings | Actions run 41593022163 and `evidence/github-ci.json`; not run locally or on Windows |
-| GitHub Actions | Checks passed; 72 backend tests, 90.26% CI statement coverage and four frontend tests | [Run 41593022163](https://github.com/sumant30s/reposentinel-ai/actions/runs/41593022163) |
-| GHCR / Render | Jobs skipped; no image published and no public cloud service provisioned | Requires account settings, credentials, environment and hosting-cost approval |
+| GitHub Actions | Latest implementation run passed: 72 backend tests, 90.27% CI statement coverage and five frontend tests | [Run 41595665902](https://github.com/sumant30s/reposentinel-ai/actions/runs/41595665902) |
+| Render public deployment | Live free Docker/SQLite service; correct revision, real completed scan with 17 candidate findings, all four report formats HTTP 200 | `evidence/render-deployment.json`, `evidence/render-smoke.json` |
+| GHCR / automatic CD | Image publication and GitHub deploy-hook jobs remain disabled | Initial public deployment was performed directly through Render after verified CI |
 
 ## Verified GitHub publication and CI
 
@@ -37,7 +38,15 @@ The Docker image built successfully. Compose started PostgreSQL and the applicat
 
 The run uploaded `validation-evidence`, artifact ID `13210724226`, digest `sha256:7046011acb643761929774cf2c94305fadf138bcebcf448850f5b205e09ffbc8`, with expiration 2026-11-17. Download it from the run before that date for the runner-generated XML/JSON reports. GitHub's job logs corroborate the summarized results. The source repository separately retains local evidence and the remote result summary.
 
-The `publish` and `deploy` jobs were **skipped** because their activation variables were unset. No GHCR image or Render deployment is claimed. The run also emitted nonfatal upstream TestClient/Node deprecation and frontend bundle-size warnings; those are maintenance items, not test failures. Browser rendering, native Windows and live model inference remain unverified.
+The initial run's `publish` and `deploy` jobs were **skipped** because their activation variables were unset. That run did not deploy Render. It also emitted nonfatal upstream TestClient/Node deprecation and frontend bundle-size warnings; those are maintenance items, not test failures. A later direct Render deployment is recorded below. Native Windows and live model inference remain unverified.
+
+## Public free Render deployment
+
+The free-demo implementation passed [Actions run 41595665902](https://github.com/sumant30s/reposentinel-ai/actions/runs/41595665902): 72 backend tests, 90.27% CI coverage, five frontend tests and all existing security/Docker/PostgreSQL gates. On 2026-11-03 the authorized direct deployment reached `live` at [reposentinel-ai-demo.onrender.com](https://reposentinel-ai-demo.onrender.com/), running commit `c9a6499b7112e826c512fc60d353faae7c6fdbe2` (documentation-only changes after the tested implementation).
+
+Actual HTTPS checks verified the expected `/health` revision, `demo_mode=true`, static index HTTP 200, unauthenticated API HTTP 401, authenticated demo scan completion with all four engines and live OSV, 17 candidate findings, all four report downloads HTTP 200 and deterministic local guidance. The recorded analysis duration was 59.682 seconds for three fixture files; scan start/finish timestamps span about 70 seconds. No large-repository throughput claim follows from this run.
+
+The browser rendered the login screen and temporary-storage warning correctly; `evidence/render-login.jpg` is a real screenshot. Browser login/dashboard interaction was not performed. The free service's SQLite data is temporary; a later authenticated check found zero retained scans after the service had slept/restarted. Download reports for retention. `evidence/render-deployment.json` and `evidence/render-smoke.json` preserve the observed deployment and test results without credentials.
 
 ## What the automated tests actually cover
 

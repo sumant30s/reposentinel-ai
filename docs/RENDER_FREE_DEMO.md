@@ -2,6 +2,10 @@
 
 The owner authorized a free deployment to Render's **My Workspace** on 2026-11-03. This profile uses one Docker web service in Singapore, containing the API, built React frontend and one scanner worker. SQLite and staging files live on the service's temporary filesystem. No paid database, persistent disk or paid compute is requested.
 
+**Live URL:** [https://reposentinel-ai-demo.onrender.com/](https://reposentinel-ai-demo.onrender.com/)
+
+**Owner dashboard:** [reposentinel-ai-demo on Render](https://dashboard.render.com/web/srv-dbkoq9m7bikc73fg65qg)
+
 ## Storage and availability
 
 This is an interview demonstration, not durable hosting. On Render's free plan the service sleeps after inactivity, may take about a minute to wake, and loses local files on restarts, redeploys and spin-down. Scan history, settings, suppressions and uploaded snapshots can disappear. Download reports you need to keep. Do not upload the only copy of any work.
@@ -10,7 +14,7 @@ The login and dashboard display this limit when `RS_DEMO_MODE=true`. Authenticat
 
 ## Configuration and ownership
 
-Initial creation uses the connected Render API tools. Render service settings are the live source of truth. `render.free.yaml` records the equivalent recreation configuration, but it is **not** attached to a Blueprint sync. The root `render.yaml` remains the separate paid persistent deployment option and must not be applied unintentionally.
+Initial creation used the connected Render API tools. Render service settings are the live source of truth. `render.free.yaml` records the recreation configuration, but it is **not** attached to a Blueprint sync. The creation tool does not expose an HTTP health-check-path field, so the live service uses Render's default TCP health checks; our verification separately checks `/health` over HTTPS. The recreation Blueprint sets `/health` explicitly. The root `render.yaml` remains the separate paid persistent deployment option and must not be applied unintentionally.
 
 The free profile keeps the real Bandit, detect-secrets, Semgrep, pip-audit and OSV integration enabled. Lower CPU can make scans slower, so per-engine timeout is 60 seconds and overall scan timeout is 300 seconds, with at most two pending scans. These limits do not guarantee all repositories fit the 512 MB memory allowance. Failures and partial coverage remain visible; the deployment will not silently upgrade to paid compute.
 
@@ -26,8 +30,14 @@ The generated token is stored as a Render environment variable; it is not includ
 
 Implementation commit `7997cd2fe677bd8e5d2eb9d49f09c626634a8ea3` passed [GitHub Actions run 41595665902](https://github.com/sumant30s/reposentinel-ai/actions/runs/41595665902), including 72 backend tests, five frontend tests, the security gates, Docker build and PostgreSQL smoke test. The free recreation Blueprint also passed validation against Render's current public JSON Schema.
 
-On 2026-11-03 the connected Render create-service operation returned HTTP 400: the repository URL was invalid or unfetchable. GitHub independently confirmed that `sumant30s/reposentinel-ai` exists and is private. Render's service list remained empty. The likely blocker is missing Git deployment credentials or missing repository permission for Render; the connector's authentication alone does not grant Render GitHub access.
+The first create-service request returned HTTP 400 because Render could not fetch the private repository. After the owner connected GitHub and granted repository access, the next request created service `srv-dbkoq9m7bikc73fg65qg`. This resolved the access blocker without making the source repository public.
 
-**No service or public URL was created, and no live HTTP test is claimed.** `docs/evidence/render-deployment.json` records the attempt and the verified CI result. To unblock, connect GitHub under Render Account Settings → Account Security → Git Deployment Credentials, then grant the Render GitHub app access specifically to this repository. The owner has already authorized this workspace and free plan; no new plan approval is needed when retrying the same deployment.
+Deployment `dep-dbkoqae7bikc73fg67s0` reached **live** on 2026-11-03 at 13:00:28 IST (07:30:28 UTC). It runs commit `c9a6499b7112e826c512fc60d353faae7c6fdbe2`; the change from the CI-verified `7997cd2` commit is documentation only. The deployed `/health` response confirmed that exact revision and `demo_mode=true`.
+
+The authenticated public HTTPS smoke test completed a real demo scan with **17 candidate findings**, with Bandit, detect-secrets, Semgrep and pip-audit all reporting `completed`, live OSV advisories, and no coverage warnings. JSON, HTML, CSV and SARIF downloads all returned HTTP 200. Unauthenticated scan access returned HTTP 401. Deterministic `local-guidance` explanations worked; live model inference is still unconfigured and unverified.
+
+The recorded scan's analysis duration was 59.682 seconds; its stored start/finish timestamps span about 70 seconds. These are distinct measurements for this three-file fixture on free compute, not general performance claims. See `docs/evidence/render-smoke.json` for actual responses and `render-deployment.json` for service/deploy metadata. A later health/login check after service sleep/start succeeded and showed zero retained scans, consistent with the disclosed temporary-storage behavior.
+
+Browser visual inspection verified the public login page and storage notice. The genuine screenshot is `docs/evidence/render-login.jpg`. The authenticated scanner flow was verified via HTTP, not by browser sign-in; dashboard visual interaction remains unverified. No paid resources or live model calls were created.
 
 Official constraints: [Render free services](https://render.com/docs/free), [environment variables](https://render.com/docs/configure-environment-variables), [deployment lifecycle](https://render.com/docs/deploys).
