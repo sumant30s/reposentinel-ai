@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     data_dir: Path = Path("data")
     sample_dir: Path = Path("sample_projects/vulnerable")
     frontend_dir: Path = Path("frontend/dist")
+    demo_mode: bool = False
     allowed_repos: str = ""
     max_archive_bytes: int = 8 * 1024 * 1024
     max_total_bytes: int = 20 * 1024 * 1024

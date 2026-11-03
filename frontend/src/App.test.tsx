@@ -12,6 +12,7 @@ import { api, setToken } from "./api";
 afterEach(() => {
   cleanup();
   vi.restoreAllMocks();
+  vi.unstubAllGlobals();
   setToken("");
 });
 function show() {
@@ -32,12 +33,25 @@ function show() {
 }
 describe("workspace access and API", () => {
   it("requires a token and describes its storage", () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ demo_mode: false }),
+    }));
     show();
     expect(screen.getByLabelText("Workspace token")).toHaveAttribute(
       "type",
       "password",
     );
     expect(screen.getByText(/token stays in memory/)).toBeInTheDocument();
+  });
+  it("discloses temporary history before a hosted demo login", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ demo_mode: true }),
+    }));
+    show();
+    expect(await screen.findByRole("note")).toHaveTextContent(/history and uploads are temporary/);
+    expect(screen.getByText(/The owner can find the workspace token in Render/)).toBeInTheDocument();
   });
   it("shows authentication failures instead of dashboard data", async () => {
     vi.stubGlobal(

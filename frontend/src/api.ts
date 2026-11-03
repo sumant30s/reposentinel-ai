@@ -1,4 +1,10 @@
 let token = "";
+export async function runtimeInfo(): Promise<{ demo_mode: boolean }> {
+  const response = await fetch("/health");
+  if (!response.ok) throw new Error("Service is not ready");
+  const body = await response.json();
+  return { demo_mode: body.demo_mode === true };
+}
 export const setToken = (value: string) => {
   token = value;
 };

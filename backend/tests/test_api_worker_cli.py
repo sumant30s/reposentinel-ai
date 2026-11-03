@@ -23,6 +23,7 @@ def finish(client, settings):
 
 def test_auth_settings_health(client):
     assert client.get("/health").json()["status"] == "ok"
+    assert client.get("/health").json()["demo_mode"] is False
     assert client.get("/api/v1/scans", headers={"Authorization": "Bearer wrong"}).status_code == 401
     assert client.get("/api/v1/scans/not-found").status_code == 404
     settings = client.get("/api/v1/settings").json()

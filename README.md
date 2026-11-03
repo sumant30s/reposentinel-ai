@@ -12,6 +12,7 @@ A working, single-owner security review application built with **FastAPI, React,
 - [Scenario questions](docs/SCENARIO_QUESTIONS.md): 15 practical scenarios with answers.
 - [Verified results](docs/TESTING.md) and [raw evidence](docs/evidence/).
 - [Deployment instructions](docs/DEPLOYMENT.md), [security design](docs/SECURITY_DESIGN.md) and [limitations](docs/PROJECT_LIMITATIONS.md).
+- [Free Render interview demo](docs/RENDER_FREE_DEMO.md): temporary SQLite storage, owner-token access and no paid database or disk.
 
 This implementation was generated and tested with an AI coding assistant. Do not describe it as independently handwritten experience. Use the guide to learn, reproduce, modify and explain it honestly.
 

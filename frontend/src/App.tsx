@@ -26,7 +26,7 @@ import {
   X,
 } from "lucide-react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import { api, download, setToken } from "./api";
+import { api, download, runtimeInfo, setToken } from "./api";
 import type {
   Dependency,
   Explanation,
@@ -75,6 +75,20 @@ function ErrorNotice({ error }: { error: unknown }) {
 }
 
 export default function App() {
+  const runtime = useQuery({
+    queryKey: ["runtime"],
+    queryFn: runtimeInfo,
+    staleTime: 60_000,
+  });
+  const demo = runtime.data?.demo_mode === true;
+  const demoNotice = demo ? (
+    <div className="notice" role="note">
+      <TriangleAlert size={17} />
+      Free interview demo: scan history and uploads are temporary and reset
+      when the service restarts. Download reports you want to keep. The app
+      may take about a minute to wake after inactivity.
+    </div>
+  ) : null;
   const [connected, setConnected] = useState(false);
   const [key, setKey] = useState("");
   const [page, setPage] = useState("Overview");
@@ -225,6 +239,7 @@ export default function App() {
           </span>
           <h2>Open your workspace</h2>
           <p>Enter your administrator API token to access scans and reports.</p>
+          {demoNotice}
           <label htmlFor="token">Workspace token</label>
           <input
             id="token"
@@ -246,8 +261,12 @@ export default function App() {
             refresh.
           </div>
           <p className="setup-hint">
-            First time? Run <code>python scripts/bootstrap.py</code> and open
-            the generated <code>.env</code> file on your machine.
+            {demo ? (
+              <>The owner can find the workspace token in Render → this service → Environment → RS_API_TOKEN.</>
+            ) : (
+              <>First time? Run <code>python scripts/bootstrap.py</code> and open
+              the generated <code>.env</code> file on your machine.</>
+            )}
           </p>
         </form>
       </div>
@@ -270,7 +289,7 @@ export default function App() {
           <div>
             Source review<small>Personal workspace</small>
           </div>
-          <Badge value="local" />
+          <Badge value={demo ? "demo" : "owner"} />
         </div>
         <div className="nav-label">WORKSPACE</div>
         <nav aria-label="Main navigation">
@@ -321,6 +340,7 @@ export default function App() {
           </div>
         </header>
         <main>
+          {demoNotice}
           <div className="page-heading">
             <div>
               <div className="eyebrow">REPOSITORY SECURITY</div>

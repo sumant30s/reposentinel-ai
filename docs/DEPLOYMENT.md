@@ -32,6 +32,8 @@ The deployment job depends on successful checks and the production environment. 
 
 ## Render — not provisioned automatically
 
+The owner subsequently authorized a **free interview demo**. Its separate profile and deployment record are described in [RENDER_FREE_DEMO.md](RENDER_FREE_DEMO.md). That profile uses ephemeral SQLite and does not apply the paid Blueprint below.
+
 `render.yaml` defines a Docker web service, persistent scan-staging disk and PostgreSQL database. These resources can incur charges. The account owner must approve the actual plan/costs in Render before provisioning. No credentials or paid services were invented or purchased by the build.
 
 1. Sign into the intended Render account and grant it access to the private `reposentinel-ai` repository.

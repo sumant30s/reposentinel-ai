@@ -54,6 +54,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 "status": "ok",
                 "version": "0.1.0",
                 "revision": os.getenv("RENDER_GIT_COMMIT", "local"),
+                "demo_mode": settings.demo_mode,
             }
         except Exception:
             return JSONResponse(

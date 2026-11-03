@@ -1,0 +1,35 @@
+# Optional recreation blueprint. The live demo is initially created through Render MCP.
+# Do not apply the paid render.yaml when you intend to use this free demo profile.
+services:
+  - type: web
+    name: reposentinel-ai-demo
+    runtime: docker
+    plan: free
+    region: singapore
+    autoDeployTrigger: "off"
+    healthCheckPath: /health
+    envVars:
+      - key: RS_API_TOKEN
+        generateValue: true
+      - key: RS_DATABASE_URL
+        value: sqlite:////app/data/reposentinel.db
+      - key: RS_DATA_DIR
+        value: /app/data
+      - key: RS_HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: "8000"
+      - key: RS_DEMO_MODE
+        value: "true"
+      - key: RS_ALLOWED_REPOS
+        value: ""
+      - key: RS_AI_PROVIDER
+        value: none
+      - key: RS_OSV_ENABLED
+        value: "true"
+      - key: RS_ENGINE_TIMEOUT
+        value: "60"
+      - key: RS_SCAN_TIMEOUT
+        value: "300"
+      - key: RS_MAX_PENDING
+        value: "2"
