@@ -1,0 +1,32 @@
+{
+  "reviewed_exceptions": [
+    {
+      "package": "mcp",
+      "version": "1.29.0",
+      "id": "CVE-2026-59951"
+    },
+    {
+      "package": "mcp",
+      "version": "1.29.0",
+      "id": "CVE-2026-116685"
+    },
+    {
+      "package": "mcp",
+      "version": "1.29.0",
+      "id": "CVE-2026-116684"
+    },
+    {
+      "package": "mcp",
+      "version": "1.29.0",
+      "id": "CVE-2026-116686"
+    },
+    {
+      "package": "opentelemetry-api",
+      "version": "1.37.0",
+      "id": "CVE-2026-114603"
+    }
+  ],
+  "blocking": [],
+  "exception_expiry": "2026-12-02",
+  "notice": "Known advisories remain installed through Semgrep; see documented reachability assessments."
+}

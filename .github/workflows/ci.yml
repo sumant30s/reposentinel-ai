@@ -1,0 +1,124 @@
+name: Quality and security
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements-dev.lock
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --require-hashes -r backend/requirements-dev.lock
+          python -m pip install --no-deps -e backend
+          npm ci --prefix frontend --ignore-scripts --no-fund --no-audit
+          mkdir -p docs/evidence
+      - name: Python lint, format and types
+        run: |
+          ruff check --config backend/pyproject.toml backend scripts
+          ruff format --config backend/pyproject.toml --check backend scripts
+          mypy --config-file backend/pyproject.toml backend/app
+      - name: Backend tests and coverage gate
+        run: pytest backend/tests --cov=app --cov-config=backend/pyproject.toml --cov-report=xml:docs/evidence/coverage.xml --junitxml=docs/evidence/pytest.xml
+      - name: Frontend checks
+        run: |
+          npm run lint --prefix frontend
+          npm test --prefix frontend
+          npm run build --prefix frontend
+      - name: Static analysis
+        run: |
+          bandit -r backend/app scripts -ll -f json -o docs/evidence/bandit-ci.json
+          semgrep scan --config backend/app/rules/semgrep.yml --metrics=off --disable-version-check --error --json backend/app frontend/src scripts > docs/evidence/semgrep-ci.json
+      - name: Dependency and secret checks
+        run: |
+          python scripts/audit_dependencies.py
+          npm audit --prefix frontend --audit-level=high
+          python scripts/check_secrets.py
+      - name: Validate SARIF and real analyzer adapters
+        run: |
+          set +e
+          reposentinel scan sample_projects/vulnerable --offline --format sarif --output docs/evidence/sample.sarif
+          result=$?
+          set -e
+          test "$result" -eq 1
+          python scripts/validate_sarif.py docs/evidence/sample.sarif
+      - name: Build Docker image
+        run: docker build -t reposentinel:ci .
+      - name: Compose PostgreSQL smoke test
+        run: |
+          python scripts/bootstrap.py
+          docker compose up -d --build --wait --wait-timeout 180
+          curl --fail --retry 8 --retry-all-errors --retry-delay 5 http://127.0.0.1:8000/health
+          python scripts/check_deployed.py http://127.0.0.1:8000
+          docker compose down -v
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: validation-evidence
+          path: docs/evidence/
+          retention-days: 14
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.PUBLISH_GHCR == 'true'
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Build and publish commit-tagged image
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_ACTOR: ${{ github.actor }}
+          GH_REPOSITORY: ${{ github.repository }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          image="ghcr.io/${GH_REPOSITORY,,}"
+          printf '%s' "$GH_TOKEN" | docker login ghcr.io -u "$GH_ACTOR" --password-stdin
+          docker build -t "$image:$COMMIT_SHA" .
+          docker push "$image:$COMMIT_SHA"
+          docker logout ghcr.io
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.DEPLOY_RENDER == 'true'
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Deploy exact verified commit and check revision
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          RENDER_HEALTH_URL: ${{ vars.RENDER_HEALTH_URL }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: python scripts/deploy_render.py

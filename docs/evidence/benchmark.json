@@ -1,0 +1,21 @@
+{
+  "measured_at": "2026-11-02T17:56:38.082519+00:00",
+  "environment": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "scope": "In-memory Python AST + secret patterns only; excludes intake, external engines, advisory network and UI. Synthetic container workload; NOT a representative laptop benchmark.",
+  "lines": 100000,
+  "files": 200,
+  "seconds": 1.1476,
+  "within_120_seconds_for_this_scope": true,
+  "corpus": {
+    "positive_examples": 10,
+    "negative_examples": 10,
+    "true_positives": 10,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "false_positive_rate": 0.0,
+    "false_discovery_rate": 0.0,
+    "limitation": "Small project-authored synthetic corpus; not independent validation or a general accuracy claim."
+  },
+  "full_pipeline_laptop_target": "NOT MEASURED"
+}

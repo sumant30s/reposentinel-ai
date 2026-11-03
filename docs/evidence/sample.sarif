@@ -1,0 +1,407 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "RepoSentinel AI",
+          "version": "0.1.0",
+          "rules": [
+            {
+              "id": "RS002",
+              "shortDescription": {
+                "text": "Hard-coded credential"
+              },
+              "help": {
+                "text": "Remove the credential, rotate it if real, and load it from a secret manager or environment."
+              }
+            },
+            {
+              "id": "RS003",
+              "shortDescription": {
+                "text": "Dynamic code execution"
+              },
+              "help": {
+                "text": "Use a strict parser such as json.loads and a fixed set of allowed operations."
+              }
+            },
+            {
+              "id": "RS001",
+              "shortDescription": {
+                "text": "Dynamic SQL query"
+              },
+              "help": {
+                "text": "Use driver placeholders and pass values separately; allowlist SQL identifiers."
+              }
+            },
+            {
+              "id": "RS004",
+              "shortDescription": {
+                "text": "Potential unsafe deserialization"
+              },
+              "help": {
+                "text": "Avoid pickle for untrusted data. Use JSON with schema validation."
+              }
+            },
+            {
+              "id": "RS005",
+              "shortDescription": {
+                "text": "Shell command execution"
+              },
+              "help": {
+                "text": "Pass an argument list with shell=False, validate inputs, and use a fixed executable."
+              }
+            },
+            {
+              "id": "RS007",
+              "shortDescription": {
+                "text": "TLS certificate verification disabled"
+              },
+              "help": {
+                "text": "Enable certificate validation and configure the correct CA trust store."
+              }
+            },
+            {
+              "id": "RS008",
+              "shortDescription": {
+                "text": "Debug configuration enabled"
+              },
+              "help": {
+                "text": "Disable debug mode in production and keep detailed errors out of public responses."
+              }
+            },
+            {
+              "id": "RS006",
+              "shortDescription": {
+                "text": "Weak cryptographic hash"
+              },
+              "help": {
+                "text": "Use modern purpose-appropriate cryptography; use Argon2/bcrypt for passwords, not a fast hash."
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "RS002",
+          "level": "error",
+          "message": {
+            "text": "Potential hard-coded credential; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "64ac4d2085fab3b452189d18b616d2883d07d77fa4ea889d7f9519661c8728db"
+          },
+          "properties": {
+            "confidence": "high",
+            "priorityScore": 75
+          }
+        },
+        {
+          "ruleId": "RS003",
+          "level": "error",
+          "message": {
+            "text": "Potential dynamic code execution; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 13
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "e2ebf69b7f5629c20d2c290b370821c23e90f9f076d0e6e3a44eec6eb1264d62"
+          },
+          "properties": {
+            "confidence": "high",
+            "priorityScore": 75
+          }
+        },
+        {
+          "ruleId": "RS001",
+          "level": "error",
+          "message": {
+            "text": "Potential dynamic sql query; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 12
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "4536ea52ed8ae019eb0db1583ecc2abdc35d672fe72e39bf237b4849c7d530c7"
+          },
+          "properties": {
+            "confidence": "medium",
+            "priorityScore": 70
+          }
+        },
+        {
+          "ruleId": "RS004",
+          "level": "error",
+          "message": {
+            "text": "Potential potential unsafe deserialization; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 14
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "208102255d8522aa8e9147249675704858c4eaf6ba014243aed772ef12b661a3"
+          },
+          "properties": {
+            "confidence": "medium",
+            "priorityScore": 70
+          }
+        },
+        {
+          "ruleId": "RS005",
+          "level": "error",
+          "message": {
+            "text": "Potential shell command execution; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 15
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "19498d1e6a0d873f13c053ee122cb6d54a04c54169952129e2f6ec42e784276e"
+          },
+          "properties": {
+            "confidence": "medium",
+            "priorityScore": 70
+          }
+        },
+        {
+          "ruleId": "RS007",
+          "level": "error",
+          "message": {
+            "text": "Potential tls certificate verification disabled; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 17
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "c89dbcf5f2cb9e574da3943f49d4f2389e7dcf7d2983c60086a5933789e7a3b3"
+          },
+          "properties": {
+            "confidence": "medium",
+            "priorityScore": 70
+          }
+        },
+        {
+          "ruleId": "RS003",
+          "level": "error",
+          "message": {
+            "text": "Potential dynamic code execution; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "client.js"
+                },
+                "region": {
+                  "startLine": 3
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "4fd014b4e26bcf97c5eac7936914555f5493a586ba16b2facd7f705c2f0c9591"
+          },
+          "properties": {
+            "confidence": "medium",
+            "priorityScore": 70
+          }
+        },
+        {
+          "ruleId": "RS007",
+          "level": "error",
+          "message": {
+            "text": "Potential tls certificate verification disabled; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "client.js"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "0401c512ad500165a0d3ee6182997d18e76ff7c9a5ef706e877922b98924327a"
+          },
+          "properties": {
+            "confidence": "medium",
+            "priorityScore": 70
+          }
+        },
+        {
+          "ruleId": "RS001",
+          "level": "warning",
+          "message": {
+            "text": "Potential dynamic sql query; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 11
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "7521b56bfa808672cf853a187468aacb80f112231d254bc45c44b01df89ed74c"
+          },
+          "properties": {
+            "confidence": "low",
+            "priorityScore": 60
+          }
+        },
+        {
+          "ruleId": "RS008",
+          "level": "warning",
+          "message": {
+            "text": "Potential debug configuration enabled; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "24c8d85616f4dd4e44a65d9a5445e8410e442c542f1e6c5d1be5f05b4aa8bc04"
+          },
+          "properties": {
+            "confidence": "high",
+            "priorityScore": 50
+          }
+        },
+        {
+          "ruleId": "RS008",
+          "level": "warning",
+          "message": {
+            "text": "Potential debug configuration enabled; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 21
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "461e813be56512137eb73726666a79d600d932be769dc6f6fb2d9eb4d2fa0248"
+          },
+          "properties": {
+            "confidence": "high",
+            "priorityScore": 50
+          }
+        },
+        {
+          "ruleId": "RS006",
+          "level": "note",
+          "message": {
+            "text": "Potential weak cryptographic hash; review data flow and deployment context before treating it as exploitable."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 16
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "reposentinel/v1": "54a6606b9130244868bd6accee422e09af2027a57cb610cba7133d9fb60e8cf0"
+          },
+          "properties": {
+            "confidence": "low",
+            "priorityScore": 35
+          }
+        }
+      ],
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1088 @@
+{
+  "findings": [
+    {
+      "rule_id": "RS002",
+      "title": "Hard-coded credential",
+      "severity": "high",
+      "confidence": "high",
+      "file": "app.py",
+      "line": 6,
+      "language": "Python",
+      "description": "Potential hard-coded credential; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Remove the credential, rotate it if real, and load it from a secret manager or environment.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-798"
+      ],
+      "owasp": "A07:2021 Identification and Authentication Failures",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/798.html"
+      ],
+      "engines": [
+        "ast",
+        "bandit",
+        "detect-secrets",
+        "secret-pattern"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "high",
+      "priority_score": 75,
+      "priority_reason": "Base 70 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "64ac4d2085fab3b452189d18b616d2883d07d77fa4ea889d7f9519661c8728db",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS003",
+      "title": "Dynamic code execution",
+      "severity": "high",
+      "confidence": "high",
+      "file": "app.py",
+      "line": 13,
+      "language": "Python",
+      "description": "Potential dynamic code execution; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Use a strict parser such as json.loads and a fixed set of allowed operations.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-95"
+      ],
+      "owasp": "A03:2021 Injection",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/95.html"
+      ],
+      "engines": [
+        "ast",
+        "bandit"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "high",
+      "priority_score": 75,
+      "priority_reason": "Base 70 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "e2ebf69b7f5629c20d2c290b370821c23e90f9f076d0e6e3a44eec6eb1264d62",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS001",
+      "title": "Dynamic SQL query",
+      "severity": "high",
+      "confidence": "medium",
+      "file": "app.py",
+      "line": 12,
+      "language": "Python",
+      "description": "Potential dynamic sql query; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Use driver placeholders and pass values separately; allowlist SQL identifiers.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-89"
+      ],
+      "owasp": "A03:2021 Injection",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/89.html"
+      ],
+      "engines": [
+        "ast"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "high",
+      "priority_score": 70,
+      "priority_reason": "Base 70 from severity; confidence +0; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "4536ea52ed8ae019eb0db1583ecc2abdc35d672fe72e39bf237b4849c7d530c7",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS004",
+      "title": "Potential unsafe deserialization",
+      "severity": "high",
+      "confidence": "medium",
+      "file": "app.py",
+      "line": 14,
+      "language": "Python",
+      "description": "Potential potential unsafe deserialization; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Avoid pickle for untrusted data. Use JSON with schema validation.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-502"
+      ],
+      "owasp": "A08:2021 Software and Data Integrity Failures",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/502.html"
+      ],
+      "engines": [
+        "ast",
+        "bandit"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "high",
+      "priority_score": 70,
+      "priority_reason": "Base 70 from severity; confidence +0; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "208102255d8522aa8e9147249675704858c4eaf6ba014243aed772ef12b661a3",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS005",
+      "title": "Shell command execution",
+      "severity": "high",
+      "confidence": "medium",
+      "file": "app.py",
+      "line": 15,
+      "language": "Python",
+      "description": "Potential shell command execution; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Pass an argument list with shell=False, validate inputs, and use a fixed executable.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-78"
+      ],
+      "owasp": "A03:2021 Injection",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/78.html"
+      ],
+      "engines": [
+        "ast",
+        "bandit"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "high",
+      "priority_score": 70,
+      "priority_reason": "Base 70 from severity; confidence +0; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "19498d1e6a0d873f13c053ee122cb6d54a04c54169952129e2f6ec42e784276e",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS007",
+      "title": "TLS certificate verification disabled",
+      "severity": "high",
+      "confidence": "medium",
+      "file": "app.py",
+      "line": 17,
+      "language": "Python",
+      "description": "Potential tls certificate verification disabled; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Enable certificate validation and configure the correct CA trust store.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-295"
+      ],
+      "owasp": "A02:2021 Cryptographic Failures",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/295.html"
+      ],
+      "engines": [
+        "ast",
+        "bandit"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "high",
+      "priority_score": 70,
+      "priority_reason": "Base 70 from severity; confidence +0; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "c89dbcf5f2cb9e574da3943f49d4f2389e7dcf7d2983c60086a5933789e7a3b3",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS003",
+      "title": "Dynamic code execution",
+      "severity": "high",
+      "confidence": "medium",
+      "file": "client.js",
+      "line": 3,
+      "language": "JavaScript/TypeScript",
+      "description": "Potential dynamic code execution; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Use a strict parser such as json.loads and a fixed set of allowed operations.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-95"
+      ],
+      "owasp": "A03:2021 Injection",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/95.html"
+      ],
+      "engines": [
+        "semgrep"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "high",
+      "priority_score": 70,
+      "priority_reason": "Base 70 from severity; confidence +0; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "4fd014b4e26bcf97c5eac7936914555f5493a586ba16b2facd7f705c2f0c9591",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS007",
+      "title": "TLS certificate verification disabled",
+      "severity": "high",
+      "confidence": "medium",
+      "file": "client.js",
+      "line": 5,
+      "language": "JavaScript/TypeScript",
+      "description": "Potential tls certificate verification disabled; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Enable certificate validation and configure the correct CA trust store.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-295"
+      ],
+      "owasp": "A02:2021 Cryptographic Failures",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/295.html"
+      ],
+      "engines": [
+        "semgrep"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "high",
+      "priority_score": 70,
+      "priority_reason": "Base 70 from severity; confidence +0; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "0401c512ad500165a0d3ee6182997d18e76ff7c9a5ef706e877922b98924327a",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS001",
+      "title": "Dynamic SQL query",
+      "severity": "high",
+      "confidence": "low",
+      "file": "app.py",
+      "line": 11,
+      "language": "Python",
+      "description": "Potential dynamic sql query; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Use driver placeholders and pass values separately; allowlist SQL identifiers.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-89"
+      ],
+      "owasp": "A03:2021 Injection",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/89.html"
+      ],
+      "engines": [
+        "bandit"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "medium",
+      "priority_score": 60,
+      "priority_reason": "Base 70 from severity; confidence -10; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "7521b56bfa808672cf853a187468aacb80f112231d254bc45c44b01df89ed74c",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS008",
+      "title": "Debug configuration enabled",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "app.py",
+      "line": 7,
+      "language": "Python",
+      "description": "Potential debug configuration enabled; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Disable debug mode in production and keep detailed errors out of public responses.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-489"
+      ],
+      "owasp": "A05:2021 Security Misconfiguration",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/489.html"
+      ],
+      "engines": [
+        "ast"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "24c8d85616f4dd4e44a65d9a5445e8410e442c542f1e6c5d1be5f05b4aa8bc04",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS008",
+      "title": "Debug configuration enabled",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "app.py",
+      "line": 21,
+      "language": "Python",
+      "description": "Potential debug configuration enabled; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Disable debug mode in production and keep detailed errors out of public responses.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-489"
+      ],
+      "owasp": "A05:2021 Security Misconfiguration",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/489.html"
+      ],
+      "engines": [
+        "ast"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "461e813be56512137eb73726666a79d600d932be769dc6f6fb2d9eb4d2fa0248",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: GHSA-cpwx-vrp4-4pq7",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "Jinja2 vulnerable to sandbox breakout through attr filter selecting format method",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [
+        "CWE-1336"
+      ],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-cpwx-vrp4-4pq7",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-27516",
+        "https://github.com/pallets/jinja/commit/90457bbf33b8662926ae65cdde4c4c32e756e403",
+        "https://github.com/pallets/jinja",
+        "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html",
+        "https://lists.debian.org/debian-lts-announce/2025/04/msg00045.html"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "GHSA-cpwx-vrp4-4pq7",
+      "cvss": [
+        {
+          "type": "CVSS_V4",
+          "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+        }
+      ],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": "MODERATE",
+      "fingerprint": "6bfbb198e12edee54fe4743a32bbea8a00dd79b350fac93161ecb274e4bca7c3",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: GHSA-g3rq-g295-4j3m",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "Regular Expression Denial of Service (ReDoS) in Jinja2",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [
+        "CWE-400"
+      ],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2020-28493",
+        "https://github.com/pallets/jinja/pull/1343",
+        "https://github.com/pallets/jinja/commit/15ef8f09b659f9100610583938005a7a10472d4d",
+        "https://github.com/advisories/GHSA-g3rq-g295-4j3m",
+        "https://github.com/pallets/jinja",
+        "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/jinja2/PYSEC-2021-66.yaml",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PVAKCOO7VBVUBM3Q6CBBTPBFNP5NDXF4",
+        "https://security.gentoo.org/glsa/202107-19",
+        "https://snyk.io/vuln/SNYK-PYTHON-JINJA2-1012994"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "GHSA-g3rq-g295-4j3m",
+      "cvss": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+        },
+        {
+          "type": "CVSS_V4",
+          "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N"
+        }
+      ],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": "MODERATE",
+      "fingerprint": "2efdc22b75d9b3407357a9827cfb3aba959a872da4d62a3db6f65e105070d644",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: GHSA-h5c8-rqwp-cp95",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "Jinja vulnerable to HTML attribute injection when passing user input as keys to xmlattr filter",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-h5c8-rqwp-cp95",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-22195",
+        "https://github.com/pallets/jinja/commit/716795349a41d4983a9a4771f7d883c96ea17be7",
+        "https://github.com/pallets/jinja",
+        "https://github.com/pallets/jinja/releases/tag/3.1.3",
+        "https://lists.debian.org/debian-lts-announce/2024/01/msg00010.html",
+        "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5XCWZD464AJJJUBOO7CMPXQ4ROBC6JX2",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DELCVUUYX75I5K4Q5WMJG4MUZJA6VAIP",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/O7YWRBX6JQCWC2XXCTZ55C7DPMGICCN3"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "GHSA-h5c8-rqwp-cp95",
+      "cvss": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+        }
+      ],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": "MODERATE",
+      "fingerprint": "c03dc689acf52694a3bf6ab89b3a7f486b32d046955ca5bbf2857ed15f4e4382",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: GHSA-h75v-3vvj-5mfj",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "Jinja vulnerable to HTML attribute injection when passing user input as keys to xmlattr filter",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [
+        "CWE-79"
+      ],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-h75v-3vvj-5mfj",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-34064",
+        "https://github.com/pallets/jinja/commit/0668239dc6b44ef38e7a6c9f91f312fd4ca581cb",
+        "https://github.com/pallets/jinja",
+        "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/567XIGSZMABG6TSMYWD7MIYNJSUQQRUC",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GCLF44KY43BSVMTE6S53B4V5WP3FRRSE",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/SSCBHIL6BYKR5NRCBXP4XMP2CEEKGFVS",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ZALNWE3TXPPHVPSI3AZ5CTMSTAVN5UMS"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "GHSA-h75v-3vvj-5mfj",
+      "cvss": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+        }
+      ],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": "MODERATE",
+      "fingerprint": "ddaaac7ef7b9b8191d2c6d475094acf894ba8cc906651cd3ddf323e643113357",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: GHSA-q2x7-8rv6-6q7h",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "Jinja has a sandbox breakout through indirect reference to format method",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [
+        "CWE-693"
+      ],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-56326",
+        "https://github.com/pallets/jinja/commit/48b0687e05a5466a91cd5812d604fa37ad0943b4",
+        "https://github.com/pallets/jinja",
+        "https://github.com/pallets/jinja/releases/tag/3.1.5",
+        "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "GHSA-q2x7-8rv6-6q7h",
+      "cvss": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+        },
+        {
+          "type": "CVSS_V4",
+          "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+        }
+      ],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": "MODERATE",
+      "fingerprint": "e94c6bef02a0c5fec97f84b9b788c1fe937074e93ebb2814794d6be3d168187c",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: PYSEC-2021-66",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "An advisory matches this declared version; verify the deployed dependency and affected code paths.",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20",
+        "https://github.com/pallets/jinja/pull/1343",
+        "https://snyk.io/vuln/SNYK-PYTHON-JINJA2-1012994",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PVAKCOO7VBVUBM3Q6CBBTPBFNP5NDXF4/",
+        "https://github.com/advisories/GHSA-g3rq-g295-4j3m"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "PYSEC-2021-66",
+      "cvss": [],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "16187b6e272600b136bed0ca3d9fb48d336b434a1f1e9e35eb49d2a26384665e",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: PYSEC-2026-1471",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "Jinja2 vulnerable to sandbox breakout through attr filter selecting format method",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-cpwx-vrp4-4pq7",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-27516",
+        "https://github.com/pallets/jinja/commit/90457bbf33b8662926ae65cdde4c4c32e756e403",
+        "https://github.com/pallets/jinja",
+        "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html",
+        "https://lists.debian.org/debian-lts-announce/2025/04/msg00045.html",
+        "https://pypi.org/project/jinja2",
+        "https://github.com/advisories/GHSA-cpwx-vrp4-4pq7"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "PYSEC-2026-1471",
+      "cvss": [
+        {
+          "type": "CVSS_V4",
+          "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+        }
+      ],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "e851925880654335779bab0de6d10e258f616a74f84a81dbd3b731b9a162c06c",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: PYSEC-2026-1473",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "Jinja vulnerable to HTML attribute injection when passing user input as keys to xmlattr filter",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-h5c8-rqwp-cp95",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-22195",
+        "https://github.com/pallets/jinja/commit/716795349a41d4983a9a4771f7d883c96ea17be7",
+        "https://github.com/pallets/jinja",
+        "https://github.com/pallets/jinja/releases/tag/3.1.3",
+        "https://lists.debian.org/debian-lts-announce/2024/01/msg00010.html",
+        "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5XCWZD464AJJJUBOO7CMPXQ4ROBC6JX2",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DELCVUUYX75I5K4Q5WMJG4MUZJA6VAIP",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/O7YWRBX6JQCWC2XXCTZ55C7DPMGICCN3"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "PYSEC-2026-1473",
+      "cvss": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+        }
+      ],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "96a7cd5471a35ac6aaaa05bed94cb5afe5631975b75f4555ab884893aebbeeea",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: PYSEC-2026-1474",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "Jinja vulnerable to HTML attribute injection when passing user input as keys to xmlattr filter",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-h75v-3vvj-5mfj",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-34064",
+        "https://github.com/pallets/jinja/commit/0668239dc6b44ef38e7a6c9f91f312fd4ca581cb",
+        "https://github.com/pallets/jinja",
+        "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/567XIGSZMABG6TSMYWD7MIYNJSUQQRUC",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GCLF44KY43BSVMTE6S53B4V5WP3FRRSE",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/SSCBHIL6BYKR5NRCBXP4XMP2CEEKGFVS",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ZALNWE3TXPPHVPSI3AZ5CTMSTAVN5UMS",
+        "https://pypi.org/project/jinja2"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "PYSEC-2026-1474",
+      "cvss": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+        }
+      ],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "f4435a18cda340bf4d8c227edb3c2b17ad53d58c193083a7eca943a41fe9857e",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS009/PyPI/Jinja2",
+      "title": "Jinja2 2.11.2: PYSEC-2026-1475",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "requirements.txt",
+      "line": null,
+      "language": "PyPI",
+      "description": "Jinja has a sandbox breakout through indirect reference to format method",
+      "remediation": "Review the advisory, upgrade to a fixed compatible version, and run regression tests.",
+      "evidence": "Declared dependency: Jinja2==2.11.2; not proof of installation or reachability.",
+      "cwe": [],
+      "owasp": "A06:2021 Vulnerable and Outdated Components",
+      "references": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-56326",
+        "https://github.com/pallets/jinja/commit/48b0687e05a5466a91cd5812d604fa37ad0943b4",
+        "https://github.com/pallets/jinja",
+        "https://github.com/pallets/jinja/releases/tag/3.1.5",
+        "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html",
+        "https://pypi.org/project/jinja2",
+        "https://github.com/advisories/GHSA-q2x7-8rv6-6q7h"
+      ],
+      "engines": [
+        "osv"
+      ],
+      "advisory_id": "PYSEC-2026-1475",
+      "cvss": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+        },
+        {
+          "type": "CVSS_V4",
+          "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+        }
+      ],
+      "priority": "medium",
+      "priority_score": 50,
+      "priority_reason": "Base 45 from severity; confidence +5; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "f2f047e995920f68d57f77c551b8440bf1ccec18bb9ae8e843de733f7184637d",
+      "suppressed": false
+    },
+    {
+      "rule_id": "RS006",
+      "title": "Weak cryptographic hash",
+      "severity": "medium",
+      "confidence": "low",
+      "file": "app.py",
+      "line": 16,
+      "language": "Python",
+      "description": "Potential weak cryptographic hash; review data flow and deployment context before treating it as exploitable.",
+      "remediation": "Use modern purpose-appropriate cryptography; use Argon2/bcrypt for passwords, not a fast hash.",
+      "evidence": "[Source omitted to avoid disclosing credentials]",
+      "cwe": [
+        "CWE-327"
+      ],
+      "owasp": "A02:2021 Cryptographic Failures",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/327.html"
+      ],
+      "engines": [
+        "ast",
+        "bandit"
+      ],
+      "advisory_id": null,
+      "cvss": [],
+      "priority": "low",
+      "priority_score": 35,
+      "priority_reason": "Base 45 from severity; confidence -10; internet exposure +0; critical asset +0. Heuristic score, not CVSS or exploitation probability.",
+      "source_severity": null,
+      "fingerprint": "54a6606b9130244868bd6accee422e09af2027a57cb610cba7133d9fb60e8cf0",
+      "suppressed": false
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "Jinja2",
+      "version": "2.11.2",
+      "ecosystem": "PyPI",
+      "file": "requirements.txt",
+      "version_kind": "declared-exact",
+      "lookup_status": "live",
+      "advisories": [
+        {
+          "id": "GHSA-cpwx-vrp4-4pq7",
+          "aliases": [
+            "CVE-2025-27516",
+            "PYSEC-2026-1471"
+          ],
+          "source_severity": "MODERATE",
+          "cvss": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ],
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-cpwx-vrp4-4pq7",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-27516",
+            "https://github.com/pallets/jinja/commit/90457bbf33b8662926ae65cdde4c4c32e756e403",
+            "https://github.com/pallets/jinja",
+            "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html",
+            "https://lists.debian.org/debian-lts-announce/2025/04/msg00045.html"
+          ]
+        },
+        {
+          "id": "GHSA-g3rq-g295-4j3m",
+          "aliases": [
+            "CVE-2020-28493",
+            "PYSEC-2021-66",
+            "SNYK-PYTHON-JINJA2-1012994"
+          ],
+          "source_severity": "MODERATE",
+          "cvss": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N"
+            }
+          ],
+          "references": [
+            "https://nvd.nist.gov/vuln/detail/CVE-2020-28493",
+            "https://github.com/pallets/jinja/pull/1343",
+            "https://github.com/pallets/jinja/commit/15ef8f09b659f9100610583938005a7a10472d4d",
+            "https://github.com/advisories/GHSA-g3rq-g295-4j3m",
+            "https://github.com/pallets/jinja",
+            "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20",
+            "https://github.com/pypa/advisory-database/tree/main/vulns/jinja2/PYSEC-2021-66.yaml",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PVAKCOO7VBVUBM3Q6CBBTPBFNP5NDXF4",
+            "https://security.gentoo.org/glsa/202107-19",
+            "https://snyk.io/vuln/SNYK-PYTHON-JINJA2-1012994"
+          ]
+        },
+        {
+          "id": "GHSA-h5c8-rqwp-cp95",
+          "aliases": [
+            "CVE-2024-22195",
+            "PYSEC-2026-1473"
+          ],
+          "source_severity": "MODERATE",
+          "cvss": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+            }
+          ],
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-h5c8-rqwp-cp95",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-22195",
+            "https://github.com/pallets/jinja/commit/716795349a41d4983a9a4771f7d883c96ea17be7",
+            "https://github.com/pallets/jinja",
+            "https://github.com/pallets/jinja/releases/tag/3.1.3",
+            "https://lists.debian.org/debian-lts-announce/2024/01/msg00010.html",
+            "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5XCWZD464AJJJUBOO7CMPXQ4ROBC6JX2",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DELCVUUYX75I5K4Q5WMJG4MUZJA6VAIP",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/O7YWRBX6JQCWC2XXCTZ55C7DPMGICCN3"
+          ]
+        },
+        {
+          "id": "GHSA-h75v-3vvj-5mfj",
+          "aliases": [
+            "CVE-2024-34064",
+            "PYSEC-2026-1474"
+          ],
+          "source_severity": "MODERATE",
+          "cvss": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+            }
+          ],
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-h75v-3vvj-5mfj",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-34064",
+            "https://github.com/pallets/jinja/commit/0668239dc6b44ef38e7a6c9f91f312fd4ca581cb",
+            "https://github.com/pallets/jinja",
+            "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/567XIGSZMABG6TSMYWD7MIYNJSUQQRUC",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GCLF44KY43BSVMTE6S53B4V5WP3FRRSE",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/SSCBHIL6BYKR5NRCBXP4XMP2CEEKGFVS",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ZALNWE3TXPPHVPSI3AZ5CTMSTAVN5UMS"
+          ]
+        },
+        {
+          "id": "GHSA-q2x7-8rv6-6q7h",
+          "aliases": [
+            "CVE-2024-56326",
+            "PYSEC-2026-1475"
+          ],
+          "source_severity": "MODERATE",
+          "cvss": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ],
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-56326",
+            "https://github.com/pallets/jinja/commit/48b0687e05a5466a91cd5812d604fa37ad0943b4",
+            "https://github.com/pallets/jinja",
+            "https://github.com/pallets/jinja/releases/tag/3.1.5",
+            "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html"
+          ]
+        },
+        {
+          "id": "PYSEC-2021-66",
+          "aliases": [
+            "CVE-2020-28493",
+            "GHSA-g3rq-g295-4j3m",
+            "SNYK-PYTHON-JINJA2-1012994"
+          ],
+          "source_severity": null,
+          "cvss": [],
+          "references": [
+            "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20",
+            "https://github.com/pallets/jinja/pull/1343",
+            "https://snyk.io/vuln/SNYK-PYTHON-JINJA2-1012994",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PVAKCOO7VBVUBM3Q6CBBTPBFNP5NDXF4/",
+            "https://github.com/advisories/GHSA-g3rq-g295-4j3m"
+          ]
+        },
+        {
+          "id": "PYSEC-2026-1471",
+          "aliases": [
+            "CVE-2025-27516",
+            "GHSA-cpwx-vrp4-4pq7"
+          ],
+          "source_severity": null,
+          "cvss": [
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ],
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-cpwx-vrp4-4pq7",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-27516",
+            "https://github.com/pallets/jinja/commit/90457bbf33b8662926ae65cdde4c4c32e756e403",
+            "https://github.com/pallets/jinja",
+            "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html",
+            "https://lists.debian.org/debian-lts-announce/2025/04/msg00045.html",
+            "https://pypi.org/project/jinja2",
+            "https://github.com/advisories/GHSA-cpwx-vrp4-4pq7"
+          ]
+        },
+        {
+          "id": "PYSEC-2026-1473",
+          "aliases": [
+            "CVE-2024-22195",
+            "GHSA-h5c8-rqwp-cp95"
+          ],
+          "source_severity": null,
+          "cvss": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+            }
+          ],
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-h5c8-rqwp-cp95",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-22195",
+            "https://github.com/pallets/jinja/commit/716795349a41d4983a9a4771f7d883c96ea17be7",
+            "https://github.com/pallets/jinja",
+            "https://github.com/pallets/jinja/releases/tag/3.1.3",
+            "https://lists.debian.org/debian-lts-announce/2024/01/msg00010.html",
+            "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5XCWZD464AJJJUBOO7CMPXQ4ROBC6JX2",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/DELCVUUYX75I5K4Q5WMJG4MUZJA6VAIP",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/O7YWRBX6JQCWC2XXCTZ55C7DPMGICCN3"
+          ]
+        },
+        {
+          "id": "PYSEC-2026-1474",
+          "aliases": [
+            "CVE-2024-34064",
+            "GHSA-h75v-3vvj-5mfj"
+          ],
+          "source_severity": null,
+          "cvss": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+            }
+          ],
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-h75v-3vvj-5mfj",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-34064",
+            "https://github.com/pallets/jinja/commit/0668239dc6b44ef38e7a6c9f91f312fd4ca581cb",
+            "https://github.com/pallets/jinja",
+            "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/567XIGSZMABG6TSMYWD7MIYNJSUQQRUC",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GCLF44KY43BSVMTE6S53B4V5WP3FRRSE",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/SSCBHIL6BYKR5NRCBXP4XMP2CEEKGFVS",
+            "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/ZALNWE3TXPPHVPSI3AZ5CTMSTAVN5UMS",
+            "https://pypi.org/project/jinja2"
+          ]
+        },
+        {
+          "id": "PYSEC-2026-1475",
+          "aliases": [
+            "CVE-2024-56326",
+            "GHSA-q2x7-8rv6-6q7h"
+          ],
+          "source_severity": null,
+          "cvss": [
+            {
+              "type": "CVSS_V3",
+              "score": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+            },
+            {
+              "type": "CVSS_V4",
+              "score": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N"
+            }
+          ],
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-56326",
+            "https://github.com/pallets/jinja/commit/48b0687e05a5466a91cd5812d604fa37ad0943b4",
+            "https://github.com/pallets/jinja",
+            "https://github.com/pallets/jinja/releases/tag/3.1.5",
+            "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html",
+            "https://pypi.org/project/jinja2",
+            "https://github.com/advisories/GHSA-q2x7-8rv6-6q7h"
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total": 22,
+    "active": 22,
+    "suppressed": 0,
+    "severities": {
+      "critical": 0,
+      "high": 9,
+      "medium": 13,
+      "low": 0
+    },
+    "files_scanned": 3,
+    "lines_scanned": 28,
+    "duration_seconds": 15.198,
+    "warnings": [],
+    "engines": {
+      "bandit": {
+        "status": "completed"
+      },
+      "detect-secrets": {
+        "status": "completed"
+      },
+      "semgrep": {
+        "status": "completed"
+      },
+      "pip-audit": {
+        "status": "completed",
+        "advisory_matches": 10,
+        "detail": "Cross-check; OSV findings are normalized separately"
+      }
+    },
+    "coverage": "completed",
+    "dependency_count": 1,
+    "notice": "A clean scan does not prove security. This scan has bounded language/rule coverage; manual review remains necessary."
+  }
+}

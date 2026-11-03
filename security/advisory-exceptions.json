@@ -1,0 +1,12 @@
+{
+  "reviewed_on": "2026-11-02",
+  "expires": "2026-12-02",
+  "scope": "Semgrep 1.183.0 CLI-only transitive dependencies; these are recorded exposure assessments, not vendor patches or a clean dependency audit.",
+  "exceptions": [
+    {"package":"mcp","version":"1.29.0","id":"CVE-2026-59951","reason":"The MCP SDK is pinned by Semgrep. RepoSentinel starts only semgrep scan; it does not instantiate or expose an MCP Streamable HTTP server. No MCP sessions are accepted.","reference":"https://github.com/advisories/GHSA-84m7-p3x7-pcfv"},
+    {"package":"mcp","version":"1.29.0","id":"CVE-2026-116685","reason":"RepoSentinel does not instantiate an MCP HTTP/SSE client or OAuth provider. Model requests use its own httpx client with redirects disabled.","reference":"https://github.com/advisories/GHSA-5h93-6whr-6q8j"},
+    {"package":"mcp","version":"1.29.0","id":"CVE-2026-116684","reason":"There is no MCP bearer-authenticated server. RepoSentinel uses its own constant-time comparison of a single-owner token; it does not use MCP AuthSettings or a shared OAuth issuer.","reference":"https://github.com/advisories/GHSA-w4fh-qvv9-3v23"},
+    {"package":"mcp","version":"1.29.0","id":"CVE-2026-116686","reason":"No MCP ClientSession or tool result validation occurs in RepoSentinel. Semgrep is invoked only with trusted local scan rules; no MCP servers are contacted.","reference":"https://github.com/advisories/GHSA-rwrf-2pqf-9j8j"},
+    {"package":"opentelemetry-api","version":"1.37.0","id":"CVE-2026-114603","reason":"Semgrep pins the OpenTelemetry family. The API has no OpenTelemetry middleware or inbound trace-header extraction, uses uvicorn h11, and scanner subprocesses disable OTEL SDK/propagators. Reassess immediately if tracing is enabled.","reference":"https://github.com/advisories/GHSA-xcq7-p3pf-p88h"}
+  ]
+}

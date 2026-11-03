@@ -1,0 +1,34 @@
+# Owner must review paid service and persistent disk costs before applying this Blueprint.
+services:
+  - type: web
+    name: reposentinel-ai
+    runtime: docker
+    plan: starter
+    autoDeployTrigger: off
+    healthCheckPath: /health
+    disk:
+      name: scan-staging
+      mountPath: /app/data
+      sizeGB: 1
+    envVars:
+      - key: RS_DATABASE_URL
+        fromDatabase:
+          name: reposentinel-db
+          property: connectionString
+      - key: RS_API_TOKEN
+        generateValue: true
+      - key: RS_DATA_DIR
+        value: /app/data
+      - key: RS_HOST
+        value: 0.0.0.0
+      - key: RS_ALLOWED_REPOS
+        value: ""
+      - key: RS_AI_PROVIDER
+        value: none
+      - key: RS_OSV_ENABLED
+        value: "true"
+databases:
+  - name: reposentinel-db
+    plan: basic-256mb
+    databaseName: reposentinel
+    user: reposentinel

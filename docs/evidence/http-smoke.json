@@ -1,0 +1,74 @@
+{
+  "health": {
+    "status": "ok",
+    "version": "0.1.0",
+    "revision": "local"
+  },
+  "frontend_status": 200,
+  "unauthenticated_status": 401,
+  "scan": {
+    "id": "2de4328c-a692-4526-a0a2-c0502e3567cb",
+    "repository_id": "6eb55e0b-dd83-4a56-a161-a8f394b1fc63",
+    "name": "Demo \u00b7 intentionally vulnerable",
+    "status": "completed",
+    "created_at": "2026-11-03T06:52:41.589345",
+    "started_at": "2026-11-03T06:52:42.103996",
+    "finished_at": "2026-11-03T06:52:53.011525",
+    "summary": {
+      "total": 17,
+      "active": 17,
+      "suppressed": 0,
+      "severities": {
+        "critical": 0,
+        "high": 9,
+        "medium": 8,
+        "low": 0
+      },
+      "files_scanned": 3,
+      "lines_scanned": 28,
+      "duration_seconds": 10.477,
+      "warnings": [],
+      "engines": {
+        "bandit": {
+          "status": "completed"
+        },
+        "detect-secrets": {
+          "status": "completed"
+        },
+        "semgrep": {
+          "status": "completed"
+        },
+        "pip-audit": {
+          "status": "completed",
+          "advisory_matches": 10,
+          "detail": "Cross-check; OSV findings are normalized separately"
+        }
+      },
+      "coverage": "completed",
+      "dependency_count": 1,
+      "policy": {
+        "threshold": "high",
+        "violated": true
+      },
+      "notice": "A clean scan does not prove security. This scan has bounded language/rule coverage; manual review remains necessary."
+    },
+    "error": null
+  },
+  "reports": {
+    "json": 200,
+    "html": 200,
+    "csv": 200,
+    "sarif": 200
+  },
+  "finding_count": 17,
+  "guidance": {
+    "summary": "Potential hard-coded credential; review data flow and deployment context before treating it as exploitable.",
+    "impact": "Hard-coded credential can affect confidentiality, integrity or availability when reachable from an untrusted input or insecure configuration.",
+    "concept": "CWE-798; A07:2021 Identification and Authentication Failures. A pattern match requires validation of data flow and deployment context.",
+    "safer_pattern": "Remove the credential, rotate it if real, and load it from a secret manager or environment.",
+    "proposed_change": "Review app.py:6. Remove the credential, rotate it if real, and load it from a secret manager or environment. Add a regression test for the original unsafe behavior. No patch has been applied.",
+    "false_positive": "Check whether input is trusted, whether this is a test fixture, whether the dependency is actually deployed, and whether the flagged code is reachable. Record evidence before suppressing.",
+    "provider": "local-guidance",
+    "warning": "No model configured; this is deterministic local guidance, not AI output."
+  }
+}

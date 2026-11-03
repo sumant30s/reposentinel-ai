@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reposentinel-ai"
+version = "0.1.0"
+description = "Bounded source-code security analysis with evidence-first triage"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "sqlalchemy>=2,<3", "alembic>=1.14,<2",
+  "pydantic-settings>=2.7,<3", "python-multipart>=0.0.20,<1", "httpx[socks]>=0.28,<1",
+  "psycopg[binary]>=3.2,<4", "packaging>=24", "defusedxml>=0.7.1,<1",
+  "bandit>=1.8,<2", "detect-secrets>=1.5,<2", "pip-audit>=2.9,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "mypy>=1.15,<2", "jsonschema>=4.23,<5", "types-defusedxml>=0.7"]
+semgrep = ["semgrep>=1.100,<2"]
+
+[project.scripts]
+reposentinel = "app.cli:main"
+reposentinel-worker = "app.workers.runner:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+
+[tool.setuptools.package-data]
+app = ["rules/*.yml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["app"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80

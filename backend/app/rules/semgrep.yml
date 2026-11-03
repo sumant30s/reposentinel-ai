@@ -1,0 +1,25 @@
+rules:
+  - id: RS003
+    languages: [javascript, typescript]
+    message: Dynamic code execution needs manual trust-boundary review.
+    severity: ERROR
+    pattern: eval(...)
+    metadata:
+      cwe: CWE-95
+  - id: RS005
+    languages: [javascript, typescript]
+    message: Shell execution with a constructed command needs manual review.
+    severity: ERROR
+    patterns:
+      - pattern-either:
+          - pattern: $CP.exec($X + $Y, ...)
+          - pattern: $CP.execSync($X + $Y, ...)
+    metadata:
+      cwe: CWE-78
+  - id: RS007
+    languages: [javascript, typescript]
+    message: TLS certificate verification is disabled.
+    severity: ERROR
+    pattern: "{rejectUnauthorized: false, ...}"
+    metadata:
+      cwe: CWE-295

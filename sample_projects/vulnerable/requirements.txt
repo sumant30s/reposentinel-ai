@@ -1,0 +1,2 @@
+# Intentionally old declaration for demonstrating real advisory correlation; never install it.
+Jinja2==2.11.2

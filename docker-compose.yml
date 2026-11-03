@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_DB: reposentinel
+      POSTGRES_USER: reposentinel
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python scripts/bootstrap.py first}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U reposentinel -d reposentinel"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file: .env
+    environment:
+      RS_DATABASE_URL: postgresql+psycopg://reposentinel:${POSTGRES_PASSWORD}@db:5432/reposentinel
+      RS_DATA_DIR: /app/data
+      RS_HOST: 0.0.0.0
+    volumes:
+      - scan_data:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp:size=256m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 256
+    mem_limit: 1536m
+    cpus: 2
+    restart: unless-stopped
+volumes:
+  postgres_data:
+  scan_data:
