@@ -24,6 +24,10 @@ The generated token is stored as a Render environment variable; it is not includ
 
 ## Verification record
 
-Deployment creation, final status, public URL, source revision and live smoke results will be recorded in `docs/evidence/render-deployment.json` only after observation. Creating a service or queuing a deploy is not evidence that it is live.
+Implementation commit `7997cd2fe677bd8e5d2eb9d49f09c626634a8ea3` passed [GitHub Actions run 41595665902](https://github.com/sumant30s/reposentinel-ai/actions/runs/41595665902), including 72 backend tests, five frontend tests, the security gates, Docker build and PostgreSQL smoke test. The free recreation Blueprint also passed validation against Render's current public JSON Schema.
+
+On 2026-11-03 the connected Render create-service operation returned HTTP 400: the repository URL was invalid or unfetchable. GitHub independently confirmed that `sumant30s/reposentinel-ai` exists and is private. Render's service list remained empty. The likely blocker is missing Git deployment credentials or missing repository permission for Render; the connector's authentication alone does not grant Render GitHub access.
+
+**No service or public URL was created, and no live HTTP test is claimed.** `docs/evidence/render-deployment.json` records the attempt and the verified CI result. To unblock, connect GitHub under Render Account Settings → Account Security → Git Deployment Credentials, then grant the Render GitHub app access specifically to this repository. The owner has already authorized this workspace and free plan; no new plan approval is needed when retrying the same deployment.
 
 Official constraints: [Render free services](https://render.com/docs/free), [environment variables](https://render.com/docs/configure-environment-variables), [deployment lifecycle](https://render.com/docs/deploys).

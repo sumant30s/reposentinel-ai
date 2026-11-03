@@ -1,0 +1,31 @@
+{
+  "observed_date": "2026-11-03",
+  "workspace_name": "My Workspace",
+  "workspace_id": "tea-dbkoa3ugekts73ensc00",
+  "requested_service": "reposentinel-ai-demo",
+  "plan": "free",
+  "region": "singapore",
+  "source_commit": "7997cd2fe677bd8e5d2eb9d49f09c626634a8ea3",
+  "ci": {
+    "run_id": 41595665902,
+    "url": "https://github.com/sumant30s/reposentinel-ai/actions/runs/41595665902",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "deployment_status": "blocked_before_service_creation",
+  "public_url": null,
+  "service_id": null,
+  "attempt": {
+    "operation": "create_web_service",
+    "response_status": 400,
+    "error": "passed in repository URL is invalid or unfetchable: https://github.com/sumant30s/reposentinel-ai"
+  },
+  "verification": {
+    "repository_exists": true,
+    "repository_private": true,
+    "repository_default_branch": "main",
+    "render_service_list_after_attempt": null,
+    "live_http_smoke": "not run; no deployment exists"
+  },
+  "required_owner_action": "Connect GitHub deployment credentials in Render and grant the Render GitHub App access to sumant30s/reposentinel-ai. Then retry the already authorized free deployment."
+}

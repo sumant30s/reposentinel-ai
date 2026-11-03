@@ -77,3 +77,9 @@ Created the private [sumant30s/reposentinel-ai](https://github.com/sumant30s/rep
 The workflow uploaded validation evidence (artifact `13210724226`, expires 2026-11-17). `docs/evidence/github-ci.json` preserves the observed metadata and result summary. A documentation-only follow-up records these results without rerunning unchanged code.
 
 GHCR `publish` and Render `deploy` were skipped because their activation variables were unset. No Render account, deployment hook, model API key or running local model was supplied to the build. Public cloud hosting, browser visual QA, native Windows and live model inference remain unverified. The owner must review the paid Render plan and connect the account before provisioning can proceed.
+
+## Authorized free deployment attempt — 2026-11-03
+
+The owner installed/connected Render and explicitly confirmed **My Workspace, free**. Added an optional free recreation Blueprint, a runtime demo flag and a notice on login/dashboard explaining that local data resets on restarts. Local verification passed 72 backend tests (90.34% statement coverage), five frontend tests, lint/types/build and the tracked-file secret scan. GitHub Actions run `41595665902` passed for source commit `7997cd2fe677bd8e5d2eb9d49f09c626634a8ea3`, including Docker/PostgreSQL checks.
+
+Attempted to create one free Docker web service in Singapore with ephemeral SQLite, all scanner adapters enabled, and a separately generated owner token supplied only through the private environment-variable mechanism. Render returned HTTP 400 because the private repository was unfetchable. The source repository exists, and Render still listed no services after the attempt. No public deployment is claimed. The remaining external action is connecting GitHub deployment credentials in Render and granting its GitHub app repository access. The existing workspace/free-plan authorization remains valid.
